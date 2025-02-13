@@ -4,7 +4,6 @@ In this project, we'll build a **simple robot car** controlled by a **joystick**
 - **Joystick X-axis** → Controls the **stepper motor** (speed & direction).  
 - **Joystick Y-axis** → Moves a **servo motor** (steering or other movement).  
 - **Joystick button** → Resets positions.  
-- **LCD Display** → Shows **servo angle & motor speed**.  
 
 ---
 
@@ -13,12 +12,17 @@ In this project, we'll build a **simple robot car** controlled by a **joystick**
 - **1x Joystick Module**  
 - **1x Servo SG90**  
 - **1x Stepper Motor 28BYJ-48 + ULN2003 driver**  
-- **1x 16x2 LCD Display**  
-- **1x 10KΩ Potentiometer** (for LCD contrast)  
 - **Wires & Breadboard**  
 
 ---
 
+## Arduino IDE Configuration
+
+You will see in the code that it uses a library **AccelStepper.h** that is no supported by default.
+
+To install a new library in the IDE, click on *Tools -> Manage Libraries...*. Search the library and install it.
+
+---
 ## 🔌 Wiring  
 ### **1️⃣ Joystick**
 | Joystick Pin | Arduino Pin |
@@ -46,110 +50,42 @@ In this project, we'll build a **simple robot car** controlled by a **joystick**
 | **VCC** | 5V |
 | **GND** | GND |
 
-### **4️⃣ LCD 16x2**
-| LCD Pin | Arduino Pin |
-|---------|------------|
-| **GND** | GND |
-| **VDD** | 5V |
-| **VO**  | Middle pin of **10KΩ potentiometer** |
-| **RS**  | 12 |
-| **RW**  | GND |
-| **E**   | 11 |
-| **D4**  | 10 |
-| **D5**  | 9 |
-| **D6**  | 3 |
-| **D7**  | 2 |
-| **BLA** | 5V |
-| **BLK** | GND |
-
 ---
 
-## 📜 Arduino Code  
+## 📜 Arduino Code
 ```cpp
 #include <Servo.h>
-#include <Stepper.h>
-#include <LiquidCrystal.h>
+#include <AccelStepper.h>
 
-// LCD setup
-LiquidCrystal lcd(12, 11, 10, 9, 3, 2);
-
-// Stepper motor setup
-const int stepsPerRevolution = 2048;
-Stepper stepper(stepsPerRevolution, 4, 6, 5, 7);
-
-// Servo setup
+// Servo
 Servo servo;
+const int SERVO_PIN = 13;
 
-// Joystick pins
-const int VRX_PIN = A0;
-const int VRY_PIN = A1;
-const int SW_PIN  = 8; // Joystick button
-
-// Variables for joystick values
-int xValue = 0;
-int yValue = 0;
-int buttonState = HIGH;
-
-int servoAngle = 90; // Initial servo position
-int motorSpeed = 0;  // Stepper speed
+// Stepper
+#define MotorInterfaceType 4
+AccelStepper stepper(MotorInterfaceType, 4, 6, 5, 7);
 
 void setup() {
-    pinMode(SW_PIN, INPUT_PULLUP);
-    servo.attach(13);
-    stepper.setSpeed(0);
+    servo.attach(SERVO_PIN);
+    servo.write(90); // Initial position
 
-    lcd.begin(16, 2);
-    lcd.print("Servo: ");
-    lcd.setCursor(0, 1);
-    lcd.print("Motor: ");
-
-    servo.write(servoAngle);
+    stepper.setMaxSpeed(1000); 
+    stepper.setAcceleration(500);
 }
 
 void loop() {
-    xValue = analogRead(VRX_PIN);
-    yValue = analogRead(VRY_PIN);
-    buttonState = digitalRead(SW_PIN);
+    // Read the current position of the Joystick
+    int joystickX = analogRead(A0);
+    int joystickY = analogRead(A1);
 
-    // Map joystick X to motor speed
-    motorSpeed = map(xValue, 0, 1023, -10, 10);
-    stepper.setSpeed(abs(motorSpeed));
-    
-    if (motorSpeed > 0) {
-        stepper.step(stepsPerRevolution / 100);
-    } else if (motorSpeed < 0) {
-        stepper.step(-stepsPerRevolution / 100);
-    }
+    // Moves the stepper motor, depending on the X coordinates
+    int motorSpeed = map(joystickX, 0, 1023, -500, 500);
+    stepper.setSpeed(motorSpeed);
+    stepper.runSpeed();
 
-    // Map joystick Y to servo angle
-    int newAngle = map(yValue, 0, 1023, 0, 180);
-    
-    if (newAngle != servoAngle) {
-        servoAngle = newAngle;
-        servo.write(servoAngle);
-    }
-
-    // Display on LCD
-    lcd.setCursor(7, 0);
-    lcd.print("    ");
-    lcd.setCursor(7, 0);
-    lcd.print(servoAngle);
-    lcd.print("°");
-
-    lcd.setCursor(7, 1);
-    lcd.print("    ");
-    lcd.setCursor(7, 1);
-    lcd.print(abs(motorSpeed));
-    lcd.print(" RPM");
-
-    // Reset positions if joystick button is pressed
-    if (buttonState == LOW) {
-        servoAngle = 90;
-        servo.write(servoAngle);
-        stepper.setSpeed(0);
-    }
-
-    delay(100);
+    // Moves the servo, depending on the Y coordinates
+    int servoAngle = map(joystickY, 0, 1023, 0, 180);
+    servo.write(servoAngle);
 }
 ```
 
@@ -164,7 +100,6 @@ void loop() {
     Controls the servo based on the Y-axis.
         Up ➝ Increases angle
         Down ➝ Decreases angle
-    Displays motor speed & servo angle on LCD.
     Joystick button resets everything to initial state.
 
 ## 🚀 Expanding the Project: Car Automation Ideas
