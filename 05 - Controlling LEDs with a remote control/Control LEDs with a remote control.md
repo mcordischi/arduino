@@ -29,9 +29,13 @@ This is a great way to learn about **infrared signals, button inputs, and output
 ### 📌 **1️⃣ IR Receiver Module (for Remote Control)**
 | IR Receiver Pin | Connect to: |
 |----------------|-------------|
+| **OUT**        | **Pin 2** (Arduino) |
 | **GND**        | GND (Arduino) |
 | **VCC**        | 5V (Arduino) |
-| **OUT**        | **Pin 2** (Arduino) |
+
+The order of the pins of the IR Receiver are looking it up front. More info in the **Datasheet** http://www.datasheetmeta.com/pdf.php?q=VS1838B
+
+
 
 ### 📌 **2️⃣ Buzzer**
 | Buzzer Pin  | Connect to: |
