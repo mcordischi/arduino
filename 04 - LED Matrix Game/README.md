@@ -91,6 +91,7 @@ const int colPins[4] = {A0, A1, A2, A3};
 int score = 0;
 int timeLeft = 20;  // 20 seconds to play
 int activeX, activeY; // Active LED position
+unsigned long lastUpdateTime = 0; //Internal control to check that a second passed
 
 void setup() {
     Serial.begin(9600);
@@ -116,11 +117,19 @@ void setup() {
 }
 
 void loop() {
-    if (timeLeft > 0) {
+  if (timeLeft > 0) {
         checkButtons();
-        delay(200);
-    } else {
-        display.showNumberDec(score); // Show final score
+        
+        // Verify that is has been a second
+        if (millis() - lastUpdateTime >= 1000) {
+            lastUpdateTime = millis();  // Updates the time
+            timeLeft--;  // Reduces the fime left
+            display.showNumberDecEx(timeLeft, 0b01000000, true);
+
+            if (timeLeft == 0) {
+                gameOver();
+            }
+        }
     }
 }
 
@@ -129,8 +138,12 @@ void newTarget() {
     lc.clearDisplay(0);
     activeX = random(0, 4);
     activeY = random(0, 4);
-
-    lc.setLed(0, activeX, activeY, true);
+    int posX = 2 * activeX;
+    int posY = 2 * activeY;
+    lc.setLed(0, posX, posY, true);
+    lc.setLed(0, posX+1, posY, true);
+    lc.setLed(0, posX, posY+1, true);
+    lc.setLed(0, posX+1, posY+1, true);
 }
 
 // Check if player pressed correct button
@@ -147,6 +160,11 @@ void checkButtons() {
         }
         digitalWrite(rowPins[row], HIGH);
     }
+}
+
+void gameOver() {
+    display.showNumberDec(score);  // Muestra el puntaje final
+    Serial.println("Game Over! Final Score: " + String(score));
 }
 ```
 
