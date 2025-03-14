@@ -23,7 +23,7 @@ You will create a simple **RGB LED controller** using three buttons. Each button
 | **Red (R)** | Arduino **Pin 9**|
 | **Green (G)** | Arduino **Pin 10** |
 | **Blue (B)** | Arduino **Pin 11** |
-| **Common (Cathode) -** | **GND** |
+| **Common (Cathode) -** | **5V** |
 
 ### 🎮 Button Connections
 Each button has **four legs**. We will use only **two opposite legs**.
