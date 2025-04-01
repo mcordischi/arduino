@@ -2,22 +2,23 @@
 
 ## 🏠 [Back Home](README.md) 
 
-### **1. LEDs Need Current Limiting**
+### 🚨 LEDs Need Current Limiting**
 - LEDs are **current-driven devices** and do not regulate current automatically.
 - Without a resistor, an LED may **draw too much current**, leading to:
   - Overheating 🔥
   - Burning out 💡💥
   - Damage to the power source ⚡
 
-### **2. Ohm’s Law: Calculating the Resistor Value**
+### ⚡ Ohm’s Law: Calculating the Resistor Value**
 Formula:
 
 ```math
 R = \frac{V_{\text{source}} - V_{\text{LED}}}{I_{\text{LED}}}
 ```
+
 Link: [Ohm's Law Calculator](https://www.omnicalculator.com/physics/ohms-law)
 
-### **3. Recommended Resistor Values for RGB LEDs**
+### 🎯 Recommended Resistor Values for RGB LEDs**
 Remainder: The Arduino Uno typically provides **5V** as the main supply voltage. 
 This is available through the 5V pin and is often used to power external components, including LEDs, sensors, and other peripherals.
 
