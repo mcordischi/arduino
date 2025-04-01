@@ -1,5 +1,7 @@
 # Why Use Resistors with LEDs?
 
+## 🏠 [Back Home](README.md) 
+
 ### **1. LEDs Need Current Limiting**
 - LEDs are **current-driven devices** and do not regulate current automatically.
 - Without a resistor, an LED may **draw too much current**, leading to:
