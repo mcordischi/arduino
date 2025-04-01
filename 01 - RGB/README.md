@@ -1,4 +1,4 @@
-# 🏠 RGB LED Controller with Three Buttons 🏠 
+# 🏠 RGB LED Controller with Three Buttons
 
 ## 🛠️ What You Will Build
 You will create a simple **RGB LED controller** using three buttons. Each button increases the intensity of Red, Green, or Blue in three steps. When a color reaches the maximum, it resets to zero.
