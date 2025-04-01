@@ -1,5 +1,7 @@
 # 🌈 Importance of RGB in Digital Systems
 
+## 🏠 [Back Home](README.md) 
+
 ## 🎨 What is RGB?
 RGB stands for **Red, Green, and Blue**—the three primary colors used in digital displays and imaging. 
 By combining these colors at different intensities, we can create a vast spectrum of colors.
