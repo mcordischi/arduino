@@ -12,7 +12,7 @@
 
 For a quick and simple install, follow this video guide:
 
-🎥 **Installing Arduino IDE in Windows** (YouTube) https://www.youtube.com/watch?v=ADn67BYMdH0 
+🎥 **Installing Arduino IDE in Windows** [YouTube](https://www.youtube.com/watch?v=ADn67BYMdH0) 
 > _(Skip the ad if there's one!)_
 
 There are other videos and tutorials out there, but this one is short and easy to follow.
@@ -54,7 +54,7 @@ When you're ready to upload your code but **don't see "Arduino"** under the port
 > We're currently using the **Arduino Uno** microcontroller. In the future, you might use a different board, so always make sure to select the right one for your project.
 
 📺 For a more detailed setup guide:  
-**Setup and Program Arduino Uno: Complete Guide** (YouTube) https://www.youtube.com/watch?v=ELUF8m24sZo
+**Setup and Program Arduino Uno: Complete Guide** (YouTube)[https://www.youtube.com/watch?v=ELUF8m24sZo]
 
 ---
 
