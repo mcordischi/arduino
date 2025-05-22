@@ -54,7 +54,7 @@ When you're ready to upload your code but **don't see "Arduino"** under the port
 > We're currently using the **Arduino Uno** microcontroller. In the future, you might use a different board, so always make sure to select the right one for your project.
 
 📺 For a more detailed setup guide:  
-**Setup and Program Arduino Uno: Complete Guide** (YouTube)[https://www.youtube.com/watch?v=ELUF8m24sZo]
+**Setup and Program Arduino Uno: Complete Guide** [YouTube](https://www.youtube.com/watch?v=ELUF8m24sZo)
 
 ---
 
