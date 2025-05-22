@@ -6,6 +6,7 @@ You will create a simple **RGB LED controller** using three buttons. Each button
 ### 📚 Knowledge links - Bonus/Important to read 
 - [RGB Importance](RGB_info.md)
 - [Resistors - Law the Ohm](Resistors_lawtheohm.md)
+- [Arduino Application Computer Installation](ArduinoAppInstal.md)
 ---
 
 ## 📌 Components Needed
